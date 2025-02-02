@@ -15,9 +15,6 @@ require('telescope').setup{
     selection_strategy = "reset",
     sorting_strategy = "descending",
     layout_strategy = "horizontal",
-    layout_defaults = {
-      -- TODO add builtin options.
-    },
     file_sorter =  require'telescope.sorters'.get_fuzzy_file,
     file_ignore_patterns = {},
     generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
@@ -39,7 +36,6 @@ require('telescope').setup{
 }
 
 vim.api.nvim_set_keymap('n', '<leader>ff', ':lua require("telescope.builtin").find_files()<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>gf', ':lua require("telescope.builtin").git_files()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fg', ':lua require("telescope.builtin").live_grep()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fh', ':lua require("telescope.builtin").help_tags()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>gs', ':lua require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ")})<CR>', { noremap = true, silent = true })

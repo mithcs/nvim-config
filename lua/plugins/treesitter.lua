@@ -7,13 +7,12 @@ end
 
 nvim_treesitter.setup {
     ensure_installed = {
-        'c', 'cpp', 'css', 'html', 'typescript', 'lua', 'python', 'go', 'astro'
+        'c', 'cpp'
     },
     sync_install = false,
     highlight = {
         enable = true,
     },
-
     indent = {
         enable = true,
     },
