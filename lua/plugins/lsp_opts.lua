@@ -21,9 +21,10 @@ end
 M.on_attach = function(client, bufnr)
     lsp_keymaps(bufnr)
 
-    -- set custom shortcuts here
-    if client.name == "gopls" then
-        vim.keymap.set("n", "<leader>err", 'iif err != nil {\n    panic!(err)\n}<Esc>', {buffer = bufnr, remap = false})
+    -- Enable snippet support for LSP servers that support it
+    if client.server_capabilities.snippetSupport then
+        -- Ensure luasnip or nvim-cmp is handling snippet expansion
+        client.server_capabilities.snippetSupport = true
     end
 end
 

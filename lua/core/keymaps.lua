@@ -5,7 +5,8 @@ local function map(mode, lhs, rhs, opts)
     if opts then
         options = vim.tbl_extend('force', options, opts)
     end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    -- vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    vim.keymap.set(mode, lhs, rhs, options)
 end
 
 -- --------------------- --------------------- ---------------------
@@ -33,7 +34,7 @@ map('n', '<Space>d', ':close<CR>')
 
 -- Create Split
 map('n', '<leader>s', ':split<CR>')
-map('n', '<leader>vs',':vsplit<CR>')
+map('n', '<leader>vs', ':vsplit<CR>')
 
 -- Stay sane
 map('i', 'jk', '<ESC>')
@@ -80,6 +81,9 @@ map('t', '<C-j>', '<C-\\><C-n><C-w>j')
 
 -- Indent entire file
 map('n', '<leader>=', 'gg=G\'\'')
+
+-- Format using LSP
+map('n', '<leader>fmt', function() vim.lsp.buf.format({ async = true }) end)
 
 -- Flutter Run
 map('n', 'Fr', ':FlutterRun --no-pub --no-enable-dart-profiling --no-cache-startup-profile<CR>')
