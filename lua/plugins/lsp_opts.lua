@@ -1,7 +1,7 @@
 local M = {}
 
 local function lsp_keymaps(bufnr)
-    local opts = {buffer = bufnr, remap = false}
+    local opts = { buffer = bufnr, remap = false }
 
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
@@ -15,6 +15,19 @@ local function lsp_keymaps(bufnr)
     vim.keymap.set("n", "<leader>drn", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end
+
+-- auto cmd to format on save
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("lsp", { clear = true }),
+    callback = function(args)
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = args.buf,
+            callback = function()
+                vim.lsp.buf.format { async = false, id = args.data.client_id }
+            end,
+        })
+    end
+})
 
 -- add more options for lsp here
 

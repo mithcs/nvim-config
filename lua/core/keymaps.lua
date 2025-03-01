@@ -81,6 +81,3 @@ map('t', '<C-j>', '<C-\\><C-n><C-w>j')
 
 -- Indent entire file
 map('n', '<leader>=', 'gg=G\'\'')
-
--- Format using LSP
-map('n', '<leader>fmt', function() vim.lsp.buf.format({ async = true }) end)
