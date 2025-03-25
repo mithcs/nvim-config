@@ -84,27 +84,15 @@ lspconfig.rust_analyzer.setup({
 -- Completions
 -- -----------------------
 local cmp = require('cmp')
-local luasnip_status_ok, luasnip = pcall(require, 'luasnip')
-if not luasnip_status_ok then
-    return
-end
-
-require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
     completion = {
         autocomplete = false, -- Disable autocomplete by default
     },
-    snippet = {
-        expand = function(args)
-            luasnip.lsp_expand(args.body)
-        end,
-    },
     sources = {
         { name = 'path' },
         { name = 'nvim_lsp' },
         { name = 'nvim_lua' },
-        { name = 'luasnip', keyword_length = 1 },
         { name = 'buffer',  keyword_length = 1 },
     },
 
@@ -116,8 +104,6 @@ cmp.setup({
         ['<C-n>'] = function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
             else
                 fallback()
             end
@@ -125,8 +111,6 @@ cmp.setup({
         ['<C-p>'] = function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif luasnip.expand_or_jumpable(-1) then
-                luasnip.expand_or_jump(-1)
             else
                 fallback()
             end

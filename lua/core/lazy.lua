@@ -97,23 +97,6 @@ lazy.setup({
         { 'neovim/nvim-lspconfig' },
         { 'hrsh7th/cmp-nvim-lsp' },
         { 'hrsh7th/nvim-cmp' },
-
-        -- Snippets
-        {
-            "L3MON4D3/LuaSnip",
-            version = "v2.3",
-            run = "make install_jsregexp",
-            config = function()
-                local ls = require('luasnip')
-                ls.config.setup({
-                    history = true,
-                    update_events = "TextChanged, TextChangedI",
-                })
-            end,
-
-            dependencies = { "rafamadriz/friendly-snippets" },
-        },
-        { 'saadparwaiz1/cmp_luasnip' },
     },
 
     performance = {
