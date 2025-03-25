@@ -14,8 +14,8 @@ local on_attach = require('plugins.lsp_opts').on_attach
 if not configs.qml6_lsp then
     configs.qml6_lsp = {
         default_config = {
-            cmd = {'qmlls6'},
-            filetypes = {'qml'},
+            cmd = { 'qmlls6' },
+            filetypes = { 'qml' },
             root_dir = function(fname)
                 return lspconfig.util.find_git_ancestor(fname) or vim.fn.getcwd()
             end,
@@ -49,7 +49,7 @@ if not configs.dartls then
     }
 end
 
-require'lspconfig'.dartls.setup({
+require 'lspconfig'.dartls.setup({
     on_attach = on_attach
 })
 -- -----------------------
@@ -60,7 +60,7 @@ lspconfig.rust_analyzer.setup({
     cmd = { "rust-analyzer" },
     filetypes = { "rust" },
     root_dir = function(fname)
-        local cargo_crate_dir = lspconfig.util.root_pattern 'Cargo.toml'(fname)
+        local cargo_crate_dir = lspconfig.util.root_pattern 'Cargo.toml' (fname)
         local cmd = 'cargo metadata --no-deps --format-version 1'
         if cargo_crate_dir ~= nil then
             cmd = cmd .. ' --manifest-path ' .. lspconfig.util.path.join(cargo_crate_dir, 'Cargo.toml')
@@ -72,7 +72,7 @@ lspconfig.rust_analyzer.setup({
         end
         return cargo_workspace_dir
             or cargo_crate_dir
-            or lspconfig.util.root_pattern 'rust-project.json'(fname)
+            or lspconfig.util.root_pattern 'rust-project.json' (fname)
             or lspconfig.util.find_git_ancestor(fname)
     end,
     settings = {
@@ -86,7 +86,7 @@ lspconfig.rust_analyzer.setup({
 local cmp = require('cmp')
 local luasnip_status_ok, luasnip = pcall(require, 'luasnip')
 if not luasnip_status_ok then
-  return
+    return
 end
 
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -101,11 +101,11 @@ cmp.setup({
         end,
     },
     sources = {
-        {name = 'path'},
-        {name = 'nvim_lsp'},
-        {name = 'nvim_lua'},
-        {name = 'luasnip', keyword_length = 1},
-        {name = 'buffer', keyword_length = 1},
+        { name = 'path' },
+        { name = 'nvim_lsp' },
+        { name = 'nvim_lua' },
+        { name = 'luasnip', keyword_length = 1 },
+        { name = 'buffer',  keyword_length = 1 },
     },
 
     mapping = cmp.mapping.preset.insert({
@@ -135,7 +135,7 @@ cmp.setup({
 
     vim.diagnostic.config({
         virtual_text = {
-            prefix = '▎',-- Could be '●', '▎', 'x'
+            prefix = '▎', -- Could be '●', '▎', 'x'
         },
         signs = true,
         severity_sort = false,

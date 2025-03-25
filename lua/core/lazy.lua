@@ -24,11 +24,12 @@ lazy.setup({
         { "nvim-treesitter/nvim-treesitter" },
 
         -- Catppuccin
-        { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+        { "catppuccin/nvim",                name = "catppuccin", priority = 1000 },
 
         -- Telescope
         {
-            'nvim-telescope/telescope.nvim', tag = '0.1.8',
+            'nvim-telescope/telescope.nvim',
+            tag = '0.1.8',
             dependencies = { 'nvim-lua/plenary.nvim' }
         },
 
@@ -86,12 +87,12 @@ lazy.setup({
         },
 
         -- LSP
-        {'williamboman/mason.nvim'},
-        {'williamboman/mason-lspconfig.nvim'},
+        { 'williamboman/mason.nvim' },
+        { 'williamboman/mason-lspconfig.nvim' },
 
-        {'neovim/nvim-lspconfig'},
-        {'hrsh7th/cmp-nvim-lsp'},
-        {'hrsh7th/nvim-cmp'},
+        { 'neovim/nvim-lspconfig' },
+        { 'hrsh7th/cmp-nvim-lsp' },
+        { 'hrsh7th/nvim-cmp' },
 
         -- Snippets
         {
