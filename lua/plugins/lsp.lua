@@ -84,12 +84,19 @@ lspconfig.rust_analyzer.setup({
 -- Completions
 -- -----------------------
 local cmp = require('cmp')
+local luasnip_status_ok, luasnip = pcall(require, 'luasnip')
+if not luasnip_status_ok then
+    return
+end
+
+require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
     completion = {
         autocomplete = false, -- Disable autocomplete by default
     },
     sources = {
+        { name = 'luasnip', keyword_length = 1 },
         { name = 'path' },
         { name = 'nvim_lsp' },
         { name = 'nvim_lua' },
@@ -104,6 +111,8 @@ cmp.setup({
         ['<C-n>'] = function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
             else
                 fallback()
             end
@@ -111,6 +120,8 @@ cmp.setup({
         ['<C-p>'] = function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
             else
                 fallback()
             end
@@ -153,13 +164,17 @@ end
 vim.api.nvim_create_user_command('NvimCmpToggle', toggle_autocomplete, {})
 
 vim.api.nvim_set_keymap('n', '<leader>nt', ':NvimCmpToggle<CR>', { noremap = true, silent = true })
+
+
 -- -----------------------
 -- Setup lsp servers
 -- -----------------------
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 require('mason-lspconfig').setup_handlers({
     function(server)
         local opts = {
-            on_attach = on_attach
+            on_attach = on_attach,
+            capabilities = capabilities,
         }
         lspconfig[server].setup(opts)
     end,
