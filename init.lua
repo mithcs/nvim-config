@@ -14,7 +14,6 @@ require('plugins.autopairs')
 require('plugins.catppuccin')
 require('plugins.lsp')
 require('plugins.telescope')
-require('plugins.telescope-undo')
 require('plugins.treesitter')
 
 -- Custom Commands

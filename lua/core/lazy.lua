@@ -61,27 +61,6 @@ lazy.setup({
             lazy = false,
         },
 
-        -- Telescope-undo
-        {
-            "debugloop/telescope-undo.nvim",
-            dependencies = {
-                {
-                    "nvim-telescope/telescope.nvim",
-                    dependencies = { "nvim-lua/plenary.nvim" },
-                },
-            },
-            keys = {
-                {
-                    "<leader>u",
-                    "<C>Telescope undo<cr>",
-                    desc = "undo history",
-                },
-            },
-            config = function()
-                require("telescope").load_extension("undo")
-            end,
-        },
-
         -- Telescope ui select
         {
             'nvim-telescope/telescope-ui-select.nvim',
