@@ -30,20 +30,7 @@ lazy.setup({
             priority = 1000
         },
 
-        -- Telescope
-        {
-            'nvim-telescope/telescope.nvim',
-            tag = '0.1.8',
-            dependencies = { 'nvim-lua/plenary.nvim' }
-        },
-
         -- Colorizer
-        {
-            'norcalli/nvim-colorizer.lua',
-            config = function()
-                require("colorizer").setup()
-            end,
-        },
 
         -- Auto pairs
         {
@@ -53,21 +40,21 @@ lazy.setup({
         },
 
         -- Comment
-        {
-            'numToStr/Comment.nvim',
-            opts = {
-                -- This is required, probably if there is no separate config file
-            },
-            lazy = false,
-        },
+        -- {
+        --     'numToStr/Comment.nvim',
+        --     opts = {
+        --         -- This is required, probably if there is no separate config file
+        --     },
+        --     lazy = false,
+        -- },
 
         -- Telescope ui select
-        {
-            'nvim-telescope/telescope-ui-select.nvim',
-            config = function()
-                require("telescope").load_extension("ui-select")
-            end,
-        },
+        -- {
+        --     'nvim-telescope/telescope-ui-select.nvim',
+        --     config = function()
+        --         require("telescope").load_extension("ui-select")
+        --     end,
+        -- },
 
         -- LSP
         { 'williamboman/mason.nvim' },

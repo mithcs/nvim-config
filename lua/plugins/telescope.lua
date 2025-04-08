@@ -1,4 +1,6 @@
-require('telescope').setup {
+local M = {}
+
+local function setup_telescope()
     defaults = {
         vimgrep_arguments = {
             'rg',
@@ -33,7 +35,7 @@ require('telescope').setup {
         grep_previewer = require 'telescope.previewers'.vim_buffer_vimgrep.new,
         qflist_previewer = require 'telescope.previewers'.qflist.new,
     }
-}
+end
 
 vim.api.nvim_set_keymap('n', '<leader>ff', ':lua require("telescope.builtin").find_files()<CR>',
     { noremap = true, silent = true })
@@ -44,3 +46,14 @@ vim.api.nvim_set_keymap('n', '<leader>fh', ':lua require("telescope.builtin").he
 vim.api.nvim_set_keymap('n', '<leader>gs',
     ':lua require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ")})<CR>',
     { noremap = true, silent = true })
+
+M.spec = {
+    {
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.8',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        config = setup_telescope
+    },
+}
+
+return M
