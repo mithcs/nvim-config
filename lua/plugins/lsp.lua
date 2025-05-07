@@ -86,6 +86,16 @@ local function lsp_setup()
             local opts = {
                 on_attach = on_attach,
             }
+
+            if server == 'volar' then
+                opts.filetypes = { 'vue', 'javascript', 'typescript' }
+                opts.init_options = {
+                    vue = {
+                        hybridMode = false,
+                    },
+                }
+            end
+
             lspconfig[server].setup(opts)
         end,
     })
